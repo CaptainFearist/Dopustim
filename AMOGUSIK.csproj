@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="telegram_logo_icon_168692.png" />
+    <None Remove="user_person_profile_avatar_icon_190943 %281%29.png" />
+    <None Remove="user_person_profile_avatar_icon_190943.png" />
+    <None Remove="vk_icon-icons.com_65934.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="telegram_logo_icon_168692.png" />
+    <Resource Include="user_person_profile_avatar_icon_190943 (1).png" />
+    <Resource Include="user_person_profile_avatar_icon_190943.png" />
+    <Resource Include="vk_icon-icons.com_65934.png" />
+  </ItemGroup>
+
+</Project>
