@@ -368,7 +368,7 @@
                 Background="{x:Null}"
                 Height="21"
                 BorderBrush="{x:Null}" />
-        <PasswordBox Style="{DynamicResource PasswordBoxStyle1}" HorizontalAlignment="Center" Margin="0,116,0,0" VerticalAlignment="Top" Width="190" Background="#FFFFF6C0" BorderBrush="#FFBFBFBF" Height="25"/>
+        <PasswordBox x:Name="txtPassINV" Style="{DynamicResource PasswordBoxStyle1}" HorizontalAlignment="Center" Margin="0,116,0,0" VerticalAlignment="Top" Width="190" Background="#FFFFF6C0" BorderBrush="#FFBFBFBF" Height="25"/>
 
 
 

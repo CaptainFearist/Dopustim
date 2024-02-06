@@ -23,5 +23,15 @@ namespace AMOGUSIK
         {
             InitializeComponent();
         }
+
+        private void Button_ClickVK(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_ClickTG(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
