@@ -11,6 +11,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using AMOGUSIK.Entities;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Security;
 
 
 namespace AMOGUSIK
@@ -41,7 +44,6 @@ namespace AMOGUSIK
 
     public partial class MainWindow : Window
     {
-
         public MainWindow()
         {
             InitializeComponent();
@@ -89,6 +91,11 @@ namespace AMOGUSIK
             Registration Reg = new Registration();
             Reg.Show();
             this.Close();
+        }
+
+        private void ShowPassword_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
