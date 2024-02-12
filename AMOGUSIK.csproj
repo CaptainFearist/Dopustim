@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="close.png" />
+    <None Remove="free-icon-lock-1890434 %281%29.png" />
     <None Remove="telegram_logo_icon_168692.png" />
     <None Remove="user_person_profile_avatar_icon_190943 %281%29.png" />
     <None Remove="user_person_profile_avatar_icon_190943.png" />
@@ -22,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="close.png" />
     <Resource Include="telegram_logo_icon_168692.png" />
     <Resource Include="user_person_profile_avatar_icon_190943 (1).png" />
     <Resource Include="user_person_profile_avatar_icon_190943.png" />
