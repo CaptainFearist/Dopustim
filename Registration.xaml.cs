@@ -1,18 +1,20 @@
 ﻿using AMOGUSIK.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AMOGUSIK
 {
     public partial class Registration : Window
     {
-        private CenterAudiContext dbContext;
+        private AudiCenterusContext dbContext;
 
         public Registration()
         {
             InitializeComponent();
-            dbContext = new CenterAudiContext();
+            dbContext = new AudiCenterusContext();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -24,43 +26,63 @@ namespace AMOGUSIK
 
         private void RegisterClick(object sender, RoutedEventArgs e)
         {
-            if (PSD2.Password != PSD3.Password)
+            string connectionString = "Data Source=DESKTOP-IPI4ON8\\SQLExpress;" +
+                "Initial Catalog=AudiCenterus;Integrated Security=True;MultipleActiveResultSets=True;" +
+                "TrustServerCertificate=True";
+
+            string firstName = Name1.Text;
+            string lastName = Surname1.Text;
+            string username = Login1.Text;
+            string password = PSD2.Password;
+            string confirmPassword = PSD3.Password;
+
+            if (password != confirmPassword)
             {
-                MessageBox.Show("Пароли не совпадают");
+                MessageBox.Show("Пароли не совпадают.");
                 return;
             }
 
-            Customers newUser = new Customers
+            try
             {
-                FirstName = Name1.Text,
-                LastName = Surname1.Text,
-                Username = Login1.Text,
-                Password = PSD2.Password,
-                // Не указываем значение для CustomerID, если это поле автоматически увеличивается
-                // RoleID устанавливаем, вызывая ваш метод GetRoleIdForClient()
-                RoleID = GetRoleIdForClient()
-            };
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
 
-            dbContext.Customers.Add(newUser);
-            dbContext.SaveChanges();
+                    // SQL-запрос для вставки данных в базу данных
+                    string sqlQuery = "INSERT INTO dbo.Customers (FirstName, LastName, Username, Password, RoleID) VALUES (@FirstName, @LastName, @Login, @Password, 3)";
 
-            MessageBox.Show("Регистрация успешна");
+                    using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                    {
+                        command.Parameters.AddWithValue("@FirstName", firstName);
+                        command.Parameters.AddWithValue("@LastName", lastName);
+                        command.Parameters.AddWithValue("@Login", username);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        // Выполните SQL-запрос
+                        int rowsAffected = command.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            // Данные успешно добавлены
+                            MessageBox.Show("Данные успешно добавлены в базу данных.");
+                        }
+                        else
+                        {
+                            // Что-то пошло не так
+                            MessageBox.Show("Произошла ошибка при добавлении данных в базу данных.");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: {ex.Message}");
+            }
         }
 
-
-
-        private int GetRoleIdForClient()
+        private void Login1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Roles clientRole = dbContext.Roles.FirstOrDefault(r => r.RoleName == "Клиент");
 
-            if (clientRole == null)
-            {
-                clientRole = new Roles { RoleName = "Клиент" };
-                dbContext.Roles.Add(clientRole);
-                dbContext.SaveChanges();
-            }
-
-            return clientRole.RoleID;
         }
     }
 }

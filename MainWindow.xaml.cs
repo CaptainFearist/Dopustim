@@ -44,6 +44,8 @@ namespace AMOGUSIK
 
     public partial class MainWindow : Window
     {
+        private DbContextOptions<AudiCenterusContext> options;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -52,38 +54,30 @@ namespace AMOGUSIK
 
         private void enterClk(object sender, RoutedEventArgs e)
         {
+            string enteredUsername = txtLog.Text;
+            string enteredPassword = txtPassINV.Password;
 
-                string Login = txtLog.Text;
-                string Password = txtPassINV.Password;
-
-
-            using (var dbContext = new CenterAudiContext())
+            using (var dbContext = new AudiCenterusContext())
             {
-                var user = dbContext.Customers.FirstOrDefault(c => c.Username == Login && c.Password == Password);
+                // Проверяем в таблице Customers
+                var customer = dbContext.Customers
+                    .FirstOrDefault(c => c.Username == enteredUsername && c.Password == enteredPassword);
 
-                if (user != null)
+                // Проверяем, найден ли пользователь в Customers
+                if (customer != null)
                 {
-                    if (dbContext.Roles.FirstOrDefault(r => r.RoleName == "Администратор").RoleID == user.RoleID)
-                    {
-                        Specialists adminWindow = new Specialists();
-                        adminWindow.Show();
-                        this.Close();
-                    }
-                    else if (dbContext.Roles.FirstOrDefault(r => r.RoleName == "Клиент").RoleID == user.RoleID)
-                    {
-                        MainForm userWindow = new MainForm();
-                        userWindow.Show();
-                        this.Close();
-                    }
+                    MessageBox.Show("Здравствуйте!");
+                    MainForm userWindow = new MainForm();
+                    userWindow.Show();
+                    this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Неверный логин или пароль!");
+                    // Неверные учетные данные
+                    MessageBox.Show("Неверное имя пользователя или пароль.");
                 }
             }
-            //MainForm mf = new MainForm();
-            //mf.Show();
-            //this.Close();
+
         }
 
         private void RegClk(object sender, RoutedEventArgs e)
@@ -92,10 +86,13 @@ namespace AMOGUSIK
             Reg.Show();
             this.Close();
         }
-
-        private void ShowPassword_Checked(object sender, RoutedEventArgs e)
+    private void ShowPassword_Checked(object sender, RoutedEventArgs e)
         {
 
         }
+
     }
+
 }
+
+
