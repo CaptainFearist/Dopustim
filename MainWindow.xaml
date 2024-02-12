@@ -11,6 +11,9 @@
         ResizeMode="NoResize">
     <Window.Resources>
 
+        <ImageBrush x:Key="OpenKeyBackground"
+                    ImageSource="C:\Users\User\source\repos\CaptainFearist\Dopustim\open.png" />
+
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
                 <Setter.Value>
@@ -375,9 +378,12 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-        <SolidColorBrush x:Key="TextBox.Static.Border3" Color="#FFABAdB3"/>
-        <SolidColorBrush x:Key="TextBox.MouseOver.Border3" Color="#FF7EB4EA"/>
-        <SolidColorBrush x:Key="TextBox.Focus.Border3" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="TextBox.Static.Border3"
+                         Color="#FFABAdB3" />
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border3"
+                         Color="#FF7EB4EA" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border3"
+                         Color="#FF569DE5" />
         <Style x:Key="txtPassinv"
                TargetType="{x:Type PasswordBox}">
             <Setter Property="PasswordChar"
@@ -478,6 +484,111 @@
                          Color="#FF7EB4EA" />
         <SolidColorBrush x:Key="TextBox.Focus.Border6"
                          Color="#FF569DE5" />
+        <Style x:Key="FocusVisual1">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                                   StrokeDashArray="1 2"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   SnapsToDevicePixels="true"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background1"
+                         Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border1"
+                         Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background1"
+                         Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border1"
+                         Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background1"
+                         Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border1"
+                         Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background1"
+                         Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border1"
+                         Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground1"
+                         Color="#FF838383" />
+        <Style x:Key="ShowHide1"
+               TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle"
+                    Value="{StaticResource FocusVisual1}" />
+            <Setter Property="Background"
+                    Value="{StaticResource Button.Static.Background1}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource Button.Static.Border1}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                                CornerRadius="7"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted"
+                                     Value="true">
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource OpenKeyBackground}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="true">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource Button.Pressed.Background1}" />
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource Button.Pressed.Border1}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled"
+                                     Value="false">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Background1}" />
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Border1}" />
+                                <Setter Property="TextElement.Foreground"
+                                        TargetName="contentPresenter"
+                                        Value="{StaticResource Button.Disabled.Foreground1}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Window.Resources>
     <Grid Background="#FFFFE983">
@@ -518,7 +629,7 @@
                  Width="190"
                  Background="#FFFFF6C0"
                  Height="25"
-                 Text="{Binding ElementName=txtPassINV, Path=Password, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding ElementName=txtPassINV, Path=Password, UpdateSourceTrigger=PropertyChanged}" />
         <Label Content="Нет аккаунта?"
                HorizontalAlignment="Left"
                Margin="79,200,0,0"
@@ -534,7 +645,8 @@
                 Background="{x:Null}"
                 Height="21"
                 BorderBrush="{x:Null}" />
-        <PasswordBox Style="{DynamicResource txtPassinv}" x:Name="txtPassINV"
+        <PasswordBox Style="{DynamicResource txtPassinv}"
+                     x:Name="txtPassINV"
                      HorizontalAlignment="Center"
                      VerticalAlignment="Top"
                      Width="190"
@@ -543,13 +655,20 @@
                      Height="25"
                      Margin="0,116,0,0" />
 
-        <CheckBox Content="Показать пароль"
-                  Checked="ShowPassword_Checked"
-                  HorizontalAlignment="Left"
-                  Margin="85,146,0,151"
-                  Background="#FFFFF6C0" />
-
-
+        <Button x:Name="ShowHide"
+                Style="{DynamicResource ShowHide1}"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Margin="280,116,0,0"
+                MouseEnter="Button_MouseEnter"
+                MouseLeave="Button_MouseLeave"
+                Width="25"
+                Height="25"
+                BorderBrush="{x:Null}">
+            <Button.Background>
+                <ImageBrush ImageSource="C:\Users\User\source\repos\CaptainFearist\Dopustim\close.png" />
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>

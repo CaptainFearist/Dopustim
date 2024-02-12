@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace AMOGUSIK
 {
@@ -47,8 +48,7 @@ namespace AMOGUSIK
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-
-                    // SQL-запрос для вставки данных в базу данных
+                                        
                     string sqlQuery = "INSERT INTO dbo.Customers (FirstName, LastName, Username, Password, RoleID) VALUES (@FirstName, @LastName, @Login, @Password, 3)";
 
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
@@ -57,18 +57,17 @@ namespace AMOGUSIK
                         command.Parameters.AddWithValue("@LastName", lastName);
                         command.Parameters.AddWithValue("@Login", username);
                         command.Parameters.AddWithValue("@Password", password);
-
-                        // Выполните SQL-запрос
+                                             
                         int rowsAffected = command.ExecuteNonQuery();
 
                         if (rowsAffected > 0)
                         {
-                            // Данные успешно добавлены
+                        
                             MessageBox.Show("Данные успешно добавлены в базу данных.");
                         }
                         else
                         {
-                            // Что-то пошло не так
+                        
                             MessageBox.Show("Произошла ошибка при добавлении данных в базу данных.");
                         }
                     }
@@ -80,9 +79,32 @@ namespace AMOGUSIK
             }
         }
 
+        private void Button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            Pas2.Text = PSD2.Password;
+            Pas2.Visibility = Visibility.Visible;
+            PSD2.Visibility = Visibility.Collapsed;
+
+            Pas3.Text = PSD3.Password;
+            Pas3.Visibility = Visibility.Visible;
+            PSD3.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            // При уходе мыши, возвращаемся к исходному состоянию
+            Pas2.Visibility = Visibility.Collapsed;
+            PSD2.Visibility = Visibility.Visible;
+
+            Pas3.Visibility = Visibility.Collapsed;
+            PSD3.Visibility = Visibility.Visible;
+        }
+
+
         private void Login1_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            // Ваш код для обработки изменения текста в поле Login1
         }
+
     }
 }

@@ -7,55 +7,86 @@
         mc:Ignorable="d"
         Title="Регистрация"
         Height="300"
-        Width="260" 
+        Width="260"
         ResizeMode="NoResize">
     <Window.Resources>
+
+        <ImageBrush x:Key="OpenKeyBackgroundReg"
+                    ImageSource="C:\Users\User\source\repos\CaptainFearist\Dopustim\open.png" />
         <SolidColorBrush x:Key="TextBox.Static.Border"
                          Color="#FFABAdB3" />
         <SolidColorBrush x:Key="TextBox.MouseOver.Border"
                          Color="#FF7EB4EA" />
         <SolidColorBrush x:Key="TextBox.Focus.Border"
                          Color="#FF569DE5" />
-        <Style x:Key="Name1" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
-            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="AllowDrop" Value="true" />
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Style x:Key="Name1"
+               TargetType="{x:Type TextBox}">
+            <Setter Property="Background"
+                    Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource TextBox.Static.Border}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="KeyboardNavigation.TabNavigation"
+                    Value="None" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="AllowDrop"
+                    Value="true" />
+            <Setter Property="ScrollViewer.PanningMode"
+                    Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled"
+                    Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" CornerRadius="7"
-                       Background="{TemplateBinding Background}"
-                       BorderBrush="{TemplateBinding BorderBrush}"
-                       BorderThickness="{TemplateBinding BorderThickness}"
-                       SnapsToDevicePixels="True">
+                        <Border x:Name="border"
+                                CornerRadius="7"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
                             <Grid>
-                                <TextBlock x:Name="placeholder" Text="Введите имя" Foreground="LightGray" Visibility="Collapsed"
-                                  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBlock x:Name="placeholder"
+                                           Text="Введите имя"
+                                           Foreground="LightGray"
+                                           Visibility="Collapsed"
+                                           VerticalAlignment="Center"
+                                           Margin="5,0,0,0" />
                                 <ScrollViewer x:Name="PART_ContentHost"
-                                     Focusable="false"
-                                     HorizontalScrollBarVisibility="Hidden"
-                                     VerticalScrollBarVisibility="Hidden" />
+                                              Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden" />
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
+                            <Trigger Property="IsEnabled"
+                                     Value="false">
+                                <Setter Property="Opacity"
+                                        TargetName="border"
+                                        Value="0.56" />
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}" />
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource TextBox.MouseOver.Border}" />
                             </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}" />
+                            <Trigger Property="IsKeyboardFocused"
+                                     Value="true">
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource TextBox.Focus.Border}" />
                             </Trigger>
-                            <Trigger Property="Text" Value="">
-                                <Setter TargetName="placeholder" Property="Visibility" Value="Visible"/>
+                            <Trigger Property="Text"
+                                     Value="">
+                                <Setter TargetName="placeholder"
+                                        Property="Visibility"
+                                        Value="Visible" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -63,51 +94,79 @@
             </Setter>
         </Style>
         <SolidColorBrush x:Key="TextBox.Static.Border1"
-                        Color="#FFABAdB3" />
+                         Color="#FFABAdB3" />
         <SolidColorBrush x:Key="TextBox.MouseOver.Border1"
-                        Color="#FF7EB4EA" />
+                         Color="#FF7EB4EA" />
         <SolidColorBrush x:Key="TextBox.Focus.Border1"
-                        Color="#FF569DE5" />
-        <Style x:Key="Surname1" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
-            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="AllowDrop" Value="true" />
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+                         Color="#FF569DE5" />
+        <Style x:Key="Surname1"
+               TargetType="{x:Type TextBox}">
+            <Setter Property="Background"
+                    Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource TextBox.Static.Border}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="KeyboardNavigation.TabNavigation"
+                    Value="None" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="AllowDrop"
+                    Value="true" />
+            <Setter Property="ScrollViewer.PanningMode"
+                    Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled"
+                    Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" CornerRadius="7"
-                       Background="{TemplateBinding Background}"
-                       BorderBrush="{TemplateBinding BorderBrush}"
-                       BorderThickness="{TemplateBinding BorderThickness}"
-                       SnapsToDevicePixels="True">
+                        <Border x:Name="border"
+                                CornerRadius="7"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
                             <Grid>
-                                <TextBlock x:Name="placeholder" Text="Введите фамилию" Foreground="LightGray" Visibility="Collapsed"
-                                  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBlock x:Name="placeholder"
+                                           Text="Введите фамилию"
+                                           Foreground="LightGray"
+                                           Visibility="Collapsed"
+                                           VerticalAlignment="Center"
+                                           Margin="5,0,0,0" />
                                 <ScrollViewer x:Name="PART_ContentHost"
-                                     Focusable="false"
-                                     HorizontalScrollBarVisibility="Hidden"
-                                     VerticalScrollBarVisibility="Hidden" />
+                                              Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden" />
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
+                            <Trigger Property="IsEnabled"
+                                     Value="false">
+                                <Setter Property="Opacity"
+                                        TargetName="border"
+                                        Value="0.56" />
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}" />
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource TextBox.MouseOver.Border}" />
                             </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}" />
+                            <Trigger Property="IsKeyboardFocused"
+                                     Value="true">
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource TextBox.Focus.Border}" />
                             </Trigger>
-                            <Trigger Property="Text" Value="">
-                                <Setter TargetName="placeholder" Property="Visibility" Value="Visible"/>
+                            <Trigger Property="Text"
+                                     Value="">
+                                <Setter TargetName="placeholder"
+                                        Property="Visibility"
+                                        Value="Visible" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -115,51 +174,79 @@
             </Setter>
         </Style>
         <SolidColorBrush x:Key="TextBox.Static.Border2"
-                        Color="#FFABAdB3" />
+                         Color="#FFABAdB3" />
         <SolidColorBrush x:Key="TextBox.MouseOver.Border2"
-                        Color="#FF7EB4EA" />
+                         Color="#FF7EB4EA" />
         <SolidColorBrush x:Key="TextBox.Focus.Border2"
-                        Color="#FF569DE5" />
-        <Style x:Key="Log2" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
-            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="AllowDrop" Value="true" />
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+                         Color="#FF569DE5" />
+        <Style x:Key="Log2"
+               TargetType="{x:Type TextBox}">
+            <Setter Property="Background"
+                    Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource TextBox.Static.Border}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="KeyboardNavigation.TabNavigation"
+                    Value="None" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="AllowDrop"
+                    Value="true" />
+            <Setter Property="ScrollViewer.PanningMode"
+                    Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled"
+                    Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border x:Name="border" CornerRadius="7"
-                       Background="{TemplateBinding Background}"
-                       BorderBrush="{TemplateBinding BorderBrush}"
-                       BorderThickness="{TemplateBinding BorderThickness}"
-                       SnapsToDevicePixels="True">
+                        <Border x:Name="border"
+                                CornerRadius="7"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
                             <Grid>
-                                <TextBlock x:Name="placeholder" Text="Введите логин" Foreground="LightGray" Visibility="Collapsed"
-                                  VerticalAlignment="Center" Margin="5,0,0,0"/>
+                                <TextBlock x:Name="placeholder"
+                                           Text="Введите логин"
+                                           Foreground="LightGray"
+                                           Visibility="Collapsed"
+                                           VerticalAlignment="Center"
+                                           Margin="5,0,0,0" />
                                 <ScrollViewer x:Name="PART_ContentHost"
-                                     Focusable="false"
-                                     HorizontalScrollBarVisibility="Hidden"
-                                     VerticalScrollBarVisibility="Hidden" />
+                                              Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden" />
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
+                            <Trigger Property="IsEnabled"
+                                     Value="false">
+                                <Setter Property="Opacity"
+                                        TargetName="border"
+                                        Value="0.56" />
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}" />
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource TextBox.MouseOver.Border}" />
                             </Trigger>
-                            <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}" />
+                            <Trigger Property="IsKeyboardFocused"
+                                     Value="true">
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource TextBox.Focus.Border}" />
                             </Trigger>
-                            <Trigger Property="Text" Value="">
-                                <Setter TargetName="placeholder" Property="Visibility" Value="Visible"/>
+                            <Trigger Property="Text"
+                                     Value="">
+                                <Setter TargetName="placeholder"
+                                        Property="Visibility"
+                                        Value="Visible" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -167,11 +254,11 @@
             </Setter>
         </Style>
         <SolidColorBrush x:Key="TextBox.Static.Border3"
-                        Color="#FFABAdB3" />
+                         Color="#FFABAdB3" />
         <SolidColorBrush x:Key="TextBox.MouseOver.Border3"
-                        Color="#FF7EB4EA" />
+                         Color="#FF7EB4EA" />
         <SolidColorBrush x:Key="TextBox.Focus.Border3"
-                        Color="#FF569DE5" />
+                         Color="#FF569DE5" />
         <Style x:Key="Pas2"
                TargetType="{x:Type TextBox}">
             <Setter Property="Background"
@@ -538,51 +625,70 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="TextBox.Static.Border5" Color="#FFABAdB3"/>
-        <SolidColorBrush x:Key="TextBox.MouseOver.Border5" Color="#FF7EB4EA"/>
-        <SolidColorBrush x:Key="TextBox.Focus.Border5" Color="#FF569DE5"/>
-        <Style x:Key="PSD2" TargetType="{x:Type PasswordBox}">
-            <Setter Property="PasswordChar" Value="●" />
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Disabled.Background}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="AllowDrop" Value="true" />
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <SolidColorBrush x:Key="TextBox.Static.Border5"
+                         Color="#FFABAdB3" />
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border5"
+                         Color="#FF7EB4EA" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border5"
+                         Color="#FF569DE5" />
+        <Style x:Key="PSD2"
+               TargetType="{x:Type PasswordBox}">
+            <Setter Property="PasswordChar"
+                    Value="●" />
+            <Setter Property="Background"
+                    Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource Button.Disabled.Background}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="KeyboardNavigation.TabNavigation"
+                    Value="None" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="AllowDrop"
+                    Value="true" />
+            <Setter Property="ScrollViewer.PanningMode"
+                    Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled"
+                    Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type PasswordBox}">
                         <Grid>
                             <Border x:Name="border"
-                            CornerRadius="7"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="True">
+                                    CornerRadius="7"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    SnapsToDevicePixels="True">
                                 <ScrollViewer x:Name="PART_ContentHost"
-                                      Focusable="false"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      VerticalScrollBarVisibility="Hidden"
-                                      BorderBrush="Gray" />
+                                              Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden"
+                                              BorderBrush="Gray" />
                             </Border>
                             <TextBlock x:Name="hintText"
-                               Text="Введите пароль"
-                               Foreground="LightGray"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               Margin="5,0,0,0">
+                                       Text="Введите пароль"
+                                       Foreground="LightGray"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="5,0,0,0">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Password.Length, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}" Value="0">
-                                                <Setter Property="Visibility" Value="Visible" />
+                                            <DataTrigger Binding="{Binding Password.Length, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}"
+                                                         Value="0">
+                                                <Setter Property="Visibility"
+                                                        Value="Visible" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding Password.Length, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}" Value="1">
-                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            <DataTrigger Binding="{Binding Password.Length, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}"
+                                                         Value="1">
+                                                <Setter Property="Visibility"
+                                                        Value="Collapsed" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -590,11 +696,17 @@
                             </TextBlock>
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="hintText" Property="Visibility" Value="Collapsed" />
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="hintText"
+                                        Property="Visibility"
+                                        Value="Collapsed" />
                             </Trigger>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter TargetName="hintText" Property="Visibility" Value="Collapsed" />
+                            <Trigger Property="IsFocused"
+                                     Value="True">
+                                <Setter TargetName="hintText"
+                                        Property="Visibility"
+                                        Value="Collapsed" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -603,58 +715,80 @@
             <Style.Triggers>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
-                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="False" />
-                        <Condition Property="IsSelectionActive" Value="true" />
+                        <Condition Property="IsInactiveSelectionHighlightEnabled"
+                                   Value="False" />
+                        <Condition Property="IsSelectionActive"
+                                   Value="true" />
                     </MultiTrigger.Conditions>
-                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
+                    <Setter Property="SelectionBrush"
+                            Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-        <SolidColorBrush x:Key="TextBox.Static.Border6" Color="#FFABAdB3"/>
-        <SolidColorBrush x:Key="TextBox.MouseOver.Border6" Color="#FF7EB4EA"/>
-        <SolidColorBrush x:Key="TextBox.Focus.Border6" Color="#FF569DE5"/>
-        <Style x:Key="PSD3" TargetType="{x:Type PasswordBox}">
-            <Setter Property="PasswordChar" Value="●" />
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Disabled.Background}" />
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-            <Setter Property="HorizontalContentAlignment" Value="Left" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="AllowDrop" Value="true" />
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <SolidColorBrush x:Key="TextBox.Static.Border6"
+                         Color="#FFABAdB3" />
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border6"
+                         Color="#FF7EB4EA" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border6"
+                         Color="#FF569DE5" />
+        <Style x:Key="PSD3"
+               TargetType="{x:Type PasswordBox}">
+            <Setter Property="PasswordChar"
+                    Value="●" />
+            <Setter Property="Background"
+                    Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource Button.Disabled.Background}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="KeyboardNavigation.TabNavigation"
+                    Value="None" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Left" />
+            <Setter Property="FocusVisualStyle"
+                    Value="{x:Null}" />
+            <Setter Property="AllowDrop"
+                    Value="true" />
+            <Setter Property="ScrollViewer.PanningMode"
+                    Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled"
+                    Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type PasswordBox}">
                         <Grid>
                             <Border x:Name="border"
-                            CornerRadius="7"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="True">
+                                    CornerRadius="7"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    SnapsToDevicePixels="True">
                                 <ScrollViewer x:Name="PART_ContentHost"
-                                      Focusable="false"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      VerticalScrollBarVisibility="Hidden"
-                                      BorderBrush="Gray" />
+                                              Focusable="false"
+                                              HorizontalScrollBarVisibility="Hidden"
+                                              VerticalScrollBarVisibility="Hidden"
+                                              BorderBrush="Gray" />
                             </Border>
                             <TextBlock x:Name="hintText"
-                               Text="Повторите пароль"
-                               Foreground="LightGray"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Left"
-                               Margin="5,0,0,0">
+                                       Text="Повторите пароль"
+                                       Foreground="LightGray"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       Margin="5,0,0,0">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding Password.Length, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}" Value="0">
-                                                <Setter Property="Visibility" Value="Visible" />
+                                            <DataTrigger Binding="{Binding Password.Length, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}"
+                                                         Value="0">
+                                                <Setter Property="Visibility"
+                                                        Value="Visible" />
                                             </DataTrigger>
-                                            <DataTrigger Binding="{Binding Password.Length, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}" Value="1">
-                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            <DataTrigger Binding="{Binding Password.Length, RelativeSource={RelativeSource AncestorType={x:Type PasswordBox}}}"
+                                                         Value="1">
+                                                <Setter Property="Visibility"
+                                                        Value="Collapsed" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -662,11 +796,17 @@
                             </TextBlock>
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="hintText" Property="Visibility" Value="Collapsed" />
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="hintText"
+                                        Property="Visibility"
+                                        Value="Collapsed" />
                             </Trigger>
-                            <Trigger Property="IsFocused" Value="True">
-                                <Setter TargetName="hintText" Property="Visibility" Value="Collapsed" />
+                            <Trigger Property="IsFocused"
+                                     Value="True">
+                                <Setter TargetName="hintText"
+                                        Property="Visibility"
+                                        Value="Collapsed" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -675,19 +815,194 @@
             <Style.Triggers>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
-                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
-                        <Condition Property="IsSelectionActive" Value="false" />
+                        <Condition Property="IsInactiveSelectionHighlightEnabled"
+                                   Value="true" />
+                        <Condition Property="IsSelectionActive"
+                                   Value="false" />
                     </MultiTrigger.Conditions>
-                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
+                    <Setter Property="SelectionBrush"
+                            Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="FocusVisual2">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                                   StrokeDashArray="1 2"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   SnapsToDevicePixels="true"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background2"
+                         Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border2"
+                         Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background2"
+                         Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border2"
+                         Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background2"
+                         Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border2"
+                         Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background2"
+                         Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border2"
+                         Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground2"
+                         Color="#FF838383" />
+        <Style x:Key="FocusVisual3">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                                   StrokeDashArray="1 2"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   SnapsToDevicePixels="true"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background3"
+                         Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border3"
+                         Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background3"
+                         Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border3"
+                         Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background3"
+                         Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border3"
+                         Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background3"
+                         Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border3"
+                         Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground3"
+                         Color="#FF838383" />
+        <Style x:Key="FocusVisual4">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2"
+                                   StrokeDashArray="1 2"
+                                   Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                                   SnapsToDevicePixels="true"
+                                   StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background4"
+                         Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border4"
+                         Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background4"
+                         Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border4"
+                         Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background4"
+                         Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border4"
+                         Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background4"
+                         Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border4"
+                         Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground4"
+                         Color="#FF838383" />
+        <Style x:Key="ShowHide2"
+               TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle"
+                    Value="{StaticResource FocusVisual4}" />
+            <Setter Property="Background"
+                    Value="{StaticResource Button.Static.Background4}" />
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource Button.Static.Border4}" />
+            <Setter Property="Foreground"
+                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness"
+                    Value="1" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Center" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Center" />
+            <Setter Property="Padding"
+                    Value="1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border"
+                                CornerRadius="7"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                            <Border.Background>
+                                <ImageBrush ImageSource="/close.png" />
+                            </Border.Background>
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Focusable="False"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted"
+                                     Value="true">
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver"
+                                     Value="true">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource OpenKeyBackgroundReg}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed"
+                                     Value="true">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource Button.Pressed.Background1}" />
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource Button.Pressed.Border1}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled"
+                                     Value="false">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Background1}" />
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource Button.Disabled.Border1}" />
+                                <Setter Property="TextElement.Foreground"
+                                        TargetName="contentPresenter"
+                                        Value="{StaticResource Button.Disabled.Foreground1}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
     </Window.Resources>
     <Grid Background="#FFFFE983">
         <Label Content="Регистрация"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Height="27" Margin="79,0,0,0" FontFamily="Segoe UI Variable Small" />
+               Height="27"
+               Margin="79,0,0,0"
+               FontFamily="Segoe UI Variable Small" />
         <TextBox x:Name="Name1"
                  Style="{DynamicResource Name1}"
                  HorizontalAlignment="Left"
@@ -697,7 +1012,7 @@
                  Width="150"
                  Height="26"
                  Background="#FFFFF6C0"
-                 BorderBrush="#FFBFBFBF"/>
+                 BorderBrush="#FFBFBFBF" />
         <TextBox x:Name="Surname1"
                  Style="{DynamicResource Surname1}"
                  HorizontalAlignment="Left"
@@ -706,8 +1021,8 @@
                  VerticalAlignment="Top"
                  Width="150"
                  Height="26"
-                 Background="#FFFFF6C0" 
-                 BorderBrush="#FFBFBFBF"/>
+                 Background="#FFFFF6C0"
+                 BorderBrush="#FFBFBFBF" />
         <TextBox x:Name="Login1"
                  Style="{DynamicResource Log2}"
                  HorizontalAlignment="Left"
@@ -716,25 +1031,29 @@
                  VerticalAlignment="Top"
                  Width="150"
                  Height="26"
-                 Background="#FFFFF6C0" 
+                 Background="#FFFFF6C0"
                  BorderBrush="#FFBFBFBF"
                  TextChanged="Login1_TextChanged" />
-        <TextBox Style="{DynamicResource Pas2}"
+        <TextBox x:Name="Pas2"
+                 Style="{DynamicResource Pas2}"
                  HorizontalAlignment="Left"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="150"
-                 Background="#FFFFF6C0" 
-                 BorderBrush="#FFBFBFBF" Height="24" Margin="48,132,0,0"/>
-        <TextBox Style="{DynamicResource Pas3}"
+                 Background="#FFFFF6C0"
+                 BorderBrush="#FFBFBFBF"
+                 Height="24"
+                 Margin="48,132,0,0" />
+        <TextBox x:Name="Pas3"
+                 Style="{DynamicResource Pas3}"
                  HorizontalAlignment="Left"
                  Margin="48,162,0,0"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
                  Width="150"
-                
-                 Background="#FFFFF6C0" 
-                 BorderBrush="#FFBFBFBF" Height="24"/>
+                 Background="#FFFFF6C0"
+                 BorderBrush="#FFBFBFBF"
+                 Height="24" />
         <Button x:Name="RegisterButton"
                 Style="{DynamicResource Zareg1}"
                 Content="Зарегестрироваться"
@@ -747,7 +1066,8 @@
         <Label Content="Есть аккаунт?"
                HorizontalAlignment="Left"
                Margin="37,228,0,0"
-               VerticalAlignment="Top" Height="28" />
+               VerticalAlignment="Top"
+               Height="28" />
         <Button Style="{DynamicResource Enter3}"
                 Content="Войти"
                 HorizontalAlignment="Left"
@@ -758,18 +1078,34 @@
                 BorderBrush="{x:Null}"
                 Click="Button_Click_1" />
         <PasswordBox x:Name="PSD2"
-                     Style="{DynamicResource PSD2}" HorizontalAlignment="Left"
+                     Style="{DynamicResource PSD2}"
+                     HorizontalAlignment="Left"
                      VerticalAlignment="Top"
                      Width="150"
                      Background="#FFFFF6C0"
-                     BorderBrush="#FFBFBFBF" Height="24" Margin="48,132,0,0"/>
+                     BorderBrush="#FFBFBFBF"
+                     Height="24"
+                     Margin="48,132,0,0" />
         <PasswordBox x:Name="PSD3"
-                     Style="{DynamicResource PSD3}" HorizontalAlignment="Left"
+                     Style="{DynamicResource PSD3}"
+                     HorizontalAlignment="Left"
                      Margin="48,162,0,0"
                      VerticalAlignment="Top"
                      Width="150"
-                     Background="#FFFFF6C0" 
-                     BorderBrush="#FFBFBFBF" Height="24"/>
+                     Background="#FFFFF6C0"
+                     BorderBrush="#FFBFBFBF"
+                     Height="24" />
+        <Button Style="{DynamicResource ShowHide2}"
+                HorizontalAlignment="Left"
+                Margin="203,149,0,0"
+                VerticalAlignment="Top"
+                Height="25"
+                Width="25"
+                MouseEnter="Button_MouseEnter"
+                MouseLeave="Button_MouseLeave">
+
+        </Button>
+
 
     </Grid>
 </Window>
