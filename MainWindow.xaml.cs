@@ -22,25 +22,25 @@ namespace AMOGUSIK
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-    public class PasswordToVisibilityConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is string password && !string.IsNullOrEmpty(password))
-            {
-                return Visibility.Collapsed;
-            }
-            else
-            {
-                return Visibility.Visible;
-            }
-        }
+    //public class PasswordToVisibilityConverter : IValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        if (value is string password && !string.IsNullOrEmpty(password))
+    //        {
+    //            return Visibility.Collapsed;
+    //        }
+    //        else
+    //        {
+    //            return Visibility.Visible;
+    //        }
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
     public partial class MainWindow : Window
     {
@@ -59,11 +59,10 @@ namespace AMOGUSIK
 
             using (var dbContext = new AudiCenterusContext())
             {
-                // Проверяем в таблице Customers
+                
                 var customer = dbContext.Customers
                     .FirstOrDefault(c => c.Username == enteredUsername && c.Password == enteredPassword);
 
-                // Проверяем, найден ли пользователь в Customers
                 if (customer != null)
                 {
                     MessageBox.Show("Здравствуйте!");
@@ -73,7 +72,6 @@ namespace AMOGUSIK
                 }
                 else
                 {
-                    // Неверные учетные данные
                     MessageBox.Show("Неверное имя пользователя или пароль.");
                 }
             }
@@ -86,9 +84,20 @@ namespace AMOGUSIK
             Reg.Show();
             this.Close();
         }
-    private void ShowPassword_Checked(object sender, RoutedEventArgs e)
-        {
 
+        private void Button_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            // При наведении мыши, показываем TextBox и копируем пароль из PasswordBox
+            txtPass.Text = txtPassINV.Password;
+            txtPass.Visibility = Visibility.Visible;
+            txtPassINV.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            // При уходе мыши, возвращаемся к исходному состоянию
+            txtPass.Visibility = Visibility.Collapsed;
+            txtPassINV.Visibility = Visibility.Visible;
         }
 
     }
