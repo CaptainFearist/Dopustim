@@ -14,6 +14,7 @@ using AMOGUSIK.Entities;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Diagnostics;
 
 
 namespace AMOGUSIK
@@ -59,24 +60,36 @@ namespace AMOGUSIK
 
             using (var dbContext = new AudiCenterusContext())
             {
-                
+                var adminRole = Roles.Admin;
+
                 var customer = dbContext.Customers
                     .FirstOrDefault(c => c.Username == enteredUsername && c.Password == enteredPassword);
 
                 if (customer != null)
                 {
                     MessageBox.Show("Здравствуйте!");
-                    MainForm userWindow = new MainForm();
-                    userWindow.Show();
+
+                    if (customer.RoleID == adminRole.RoleID)
+                    {
+                        Specialists adminWindow = new Specialists();
+                        adminWindow.Show();
+                    }
+                    else
+                    {
+                        MainForm userWindow = new MainForm();
+                        userWindow.Show();
+                    }
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Неверное имя пользователя или пароль.");
+                    MessageBox.Show("Пользователь не найден.");
                 }
             }
-
         }
+
+
+
 
         private void RegClk(object sender, RoutedEventArgs e)
         {
