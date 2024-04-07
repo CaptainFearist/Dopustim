@@ -19,6 +19,8 @@ namespace AMOGUSIK.Entities
 
         public virtual ICollection<Customers> Customers { get; set; }
         public virtual ICollection<Employees> Employees { get; set; }
+
+        public static Roles Admin = new Roles { RoleID = 1, RoleName = "Администратор" };
     }
 
 }

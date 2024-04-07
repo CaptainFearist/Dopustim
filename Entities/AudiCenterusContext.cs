@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace AMOGUSIK.Entities
 {
@@ -23,6 +24,8 @@ namespace AMOGUSIK.Entities
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<ServiceOrders> ServiceOrders { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -36,6 +39,19 @@ namespace AMOGUSIK.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ServiceOrders>(entity =>
+            {
+                entity.HasKey(e => e.OrderID);
+
+                // Пример: Если EmployeeID является внешним ключом для связи
+                //entity.HasOne<Employees>()
+                //      .WithMany()
+                //      .HasForeignKey(e => e.EmployeeID)
+                //      .OnDelete(DeleteBehavior.ClientSetNull)
+                //      .HasConstraintName("FK_ServiceOrders_Employees");
+            });
+
+
             modelBuilder.Entity<Roles>(entity =>
             {
                 entity.HasKey(e => e.RoleID);
@@ -46,11 +62,11 @@ namespace AMOGUSIK.Entities
                       .HasConstraintName("FK_Customers_Roles");
 
                 // Добавление связи с Employees
-                entity.HasMany(r => r.Employees)
-                      .WithOne(e => e.Role)
-                      .HasForeignKey(e => e.RoleID)
-                      .OnDelete(DeleteBehavior.ClientSetNull)
-                      .HasConstraintName("FK_Employees_Roles");
+                //entity.HasMany(r => r.Employees)
+                //      .WithOne(e => e.Role)
+                //      .HasForeignKey(e => e.RoleID)
+                //      .OnDelete(DeleteBehavior.ClientSetNull)
+                //      .HasConstraintName("FK_Employees_Roles");
             });
 
             modelBuilder.Entity<Customers>(entity =>
@@ -77,14 +93,27 @@ namespace AMOGUSIK.Entities
                 entity.Property(e => e.FirstName).HasMaxLength(50).IsUnicode(false);
                 entity.Property(e => e.LastName).HasMaxLength(50).IsUnicode(false);
                 entity.Property(e => e.Position).HasMaxLength(50).IsUnicode(false);
-                entity.Property(e => e.RoleID).HasColumnName("RoleID");
+                //entity.Property(e => e.RoleID).HasColumnName("RoleID");
 
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.Employees)
-                    .HasForeignKey(d => d.RoleID)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Employees_Roles");
+                //entity.HasOne(d => d.Role)
+                //    .WithMany(p => p.Employees)
+                //    .HasForeignKey(d => d.RoleID)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Employees_Roles");
             });
+
+            modelBuilder.Entity<ServiceOrders>(entity =>
+            {
+                entity.HasKey(e => e.OrderID);
+                entity.Property(e => e.OrderID).ValueGeneratedNever();
+                entity.Property(e => e.CarID).HasColumnName("CarID");
+                entity.Property(e => e.ServiceTypeID).HasColumnName("ServiceTypeID");
+                entity.Property(e => e.OrderDate).HasColumnName("OrderDate");
+                entity.Property(e => e.Description).HasColumnName("Description");
+                entity.Property(e => e.Cost).HasColumnName("Cost");
+
+        });
+
 
             OnModelCreatingPartial(modelBuilder);
         }

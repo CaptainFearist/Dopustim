@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AMOGUSIK.Entities;
+using AMOGUSIK.ViewModels;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace AMOGUSIK
 {
@@ -19,9 +10,18 @@ namespace AMOGUSIK
     /// </summary>
     public partial class Specialists : Window
     {
-        public Specialists()
+            public Specialists()
+            {
+                InitializeComponent();
+                DataContext = new MainViewModel();
+            }
+
+        public List<ServiceOrders> GetOrders()
         {
-            InitializeComponent();
+            using (var context = new AudiCenterusContext())
+            {
+                return context.ServiceOrders.ToList();
+            }
         }
 
         private void Button_ClickVK(object sender, RoutedEventArgs e)
