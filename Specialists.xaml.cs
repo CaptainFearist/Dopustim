@@ -1,20 +1,24 @@
-﻿using AMOGUSIK.Entities;
-using AMOGUSIK.ViewModels;
+﻿using System.Collections.Generic;
 using System.Windows;
-
+using System.Windows.Controls;
+using AMOGUSIK.Entities;
+using AMOGUSIK.ViewModels;
+using Castle.Core.Resource;
+using Microsoft.EntityFrameworkCore;
 
 namespace AMOGUSIK
 {
-    /// <summary>
-    /// Логика взаимодействия для Specialists.xaml
-    /// </summary>
     public partial class Specialists : Window
     {
-            public Specialists()
-            {
-                InitializeComponent();
-                DataContext = new MainViewModel();
-            }
+        private List<ServiceOrders> _orders;
+
+        public Specialists()
+        {
+            InitializeComponent();
+            DataContext = new MainViewModel();
+            _orders = GetOrders();
+            RefreshOrders();
+        }
 
         public List<ServiceOrders> GetOrders()
         {
@@ -23,6 +27,129 @@ namespace AMOGUSIK
                 return context.ServiceOrders.ToList();
             }
         }
+        private void SortByDateAscending_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel viewModel)
+            {
+                viewModel.SortByDateAscendingCommand.Execute(null);
+                RefreshOrders();
+            }
+        }
+
+        private void SortByDateDescending_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is MainViewModel viewModel)
+            {
+                viewModel.SortByDateDescendingCommand.Execute(null);
+                RefreshOrders();
+            }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceOrderDialog dialog = new ServiceOrderDialog();
+
+            if (dialog.ShowDialog() == true)
+            {
+                ServiceOrders newOrder = dialog.Order;
+
+                using (var context = new AudiCenterusContext())
+                {
+                    var lastCustomer = context.Customers.OrderByDescending(c => c.CustomerID).FirstOrDefault();
+
+                    if (lastCustomer != null)
+                    {
+                        Cars newCar = new Cars
+                        {
+                            CustomerID = lastCustomer.CustomerID,
+                            Model = "Model",
+                            Year = 2022,
+                            VIN = "VIN1234567890"
+                        };
+                        context.Cars.Add(newCar);
+                        newOrder.Car = newCar;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не удалось найти клиентов. Добавьте клиента перед созданием заказа.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    var serviceType = context.ServiceTypes.FirstOrDefault(st => st.TypeName == "");
+                    if (serviceType == null)
+                    {
+                        serviceType = new ServiceTypes { TypeName = "Название типа" };
+                        context.ServiceTypes.Add(serviceType);
+                        context.SaveChanges();
+                    }
+
+                    newOrder.ServiceTypeID = serviceType.ServiceTypeID;
+                    context.ServiceOrders.Add(newOrder);
+                    context.SaveChanges();
+                }
+                _orders.Add(newOrder);
+                RefreshOrders();
+            }
+        }
+
+
+
+        private void RefreshOrders()
+        {
+            ordersListBox.ItemsSource = null;
+            ordersListBox.ItemsSource = _orders;
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceOrders selectedOrder = (ServiceOrders)ordersListBox.SelectedItem;
+
+            if (selectedOrder != null)
+            {
+                ServiceOrderDialog dialog = new ServiceOrderDialog(selectedOrder);
+                dialog.ShowDialog();
+
+                RefreshOrders();
+            }
+            else
+            {
+                MessageBox.Show("Выберите заказ для редактирования.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceOrders selectedOrder = (ServiceOrders)ordersListBox.SelectedItem;
+
+            if (selectedOrder != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этот заказ?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (var context = new AudiCenterusContext())
+                    {
+                        context.ServiceOrders.Remove(selectedOrder);
+                        context.SaveChanges();
+                    }
+
+                    _orders.Remove(selectedOrder);
+                    RefreshOrders();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите заказ для удаления.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchQuery = SearchTextBox.Text;
+            List<ServiceOrders> filteredOrders = _orders.Where(order => order.Description.Contains(searchQuery)).ToList();
+            ordersListBox.ItemsSource = filteredOrders;
+        }
+
 
         private void Button_ClickVK(object sender, RoutedEventArgs e)
         {

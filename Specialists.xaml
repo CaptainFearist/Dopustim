@@ -651,7 +651,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Button Style="{DynamicResource ButtonStyleVK}" HorizontalAlignment="Left" Margin="55,0,0,0" VerticalAlignment="Center" Width="25" Height="25" Grid.Column="2" BorderBrush="{x:Null}" Click="Button_ClickVK">
+                <Button Style="{DynamicResource ButtonStyleVK}" HorizontalAlignment="Left" Margin="55,5,0,0" VerticalAlignment="Top" Width="25" Height="25" Grid.Column="2" BorderBrush="{x:Null}" Click="Button_ClickVK">
                     <Button.Background>
                         <ImageBrush ImageSource="/vk_icon-icons.com_65934.png"/>
                     </Button.Background>
@@ -662,10 +662,6 @@
                     </Button.Background>
                 </Button>
                 <Button Style="{DynamicResource ButtonStyleAboutUS}" Content="О нас" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1" Grid.ColumnSpan="2" Height="25" Margin="6,0,0,0" Width="45" Background="#FF989255"/>
-
-
-
-
             </Grid>
         </Border>
         <StackPanel Grid.RowSpan="2"
@@ -687,7 +683,7 @@
                         </Grid.RowDefinitions>
 
                         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="0,0,0,10">
-                            <ListBox Style="{DynamicResource ListBoxStyle1}" ItemsSource="{Binding Orders}" Margin="10" Background="#FFFFF6C0">
+                            <ListBox Name="ordersListBox" Style="{DynamicResource ListBoxStyle1}" ItemsSource="{Binding Orders}" Margin="10" Background="#FFFFF6C0">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <Border BorderThickness="1" CornerRadius="7" BorderBrush="Gray" Margin="5" Padding="5">
@@ -710,9 +706,16 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
                         </ScrollViewer>
+                        <!-- Кнопки для добавления, редактирования и удаления данных -->
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Content="Добавить" Click="AddButton_Click" Margin="5"/>
+                            <Button Content="Редактировать" Click="EditButton_Click" Margin="5"/>
+                            <Button Content="Удалить" Click="DeleteButton_Click" Margin="5"/>
+                        </StackPanel>
                     </Grid>
                 </TabItem>
             </TabControl>
+
         </StackPanel>
 
         <DockPanel Grid.RowSpan="2" Margin="283,35,0,436">
@@ -723,11 +726,12 @@
              Height="27" 
              Background="#FFFFF6C0" 
              BorderBrush="#FFDACF5D" 
-             Margin="0,0,5,0" />
+             Margin="0,0,5,0"
+             TextChanged="SearchTextBox_TextChanged"/>
         </DockPanel>
         <StackPanel Grid.RowSpan="2" HorizontalAlignment="Center" Margin="5,35,352,436">
-            <Button Style="{DynamicResource ButtonStyle4}" Content="По дате (новые)" Command="{Binding SortByDateDescendingCommand}" Height="20" Width="120" Background="#FFBBB474"/>
-            <Button Style="{DynamicResource ButtonStyle5}" Content="По дате (старые)" Command="{Binding SortByDateAscendingCommand}" Height="20" Width="120" Background="#FFBBB474"/>
+            <Button Style="{DynamicResource ButtonStyle4}" Content="По дате (новые)" Height="20" Width="120" Background="#FFBBB474" Click="SortByDateAscending_Click"/>
+            <Button Style="{DynamicResource ButtonStyle5}" Content="По дате (старые)" Height="20" Width="120" Background="#FFBBB474" Click="SortByDateDescending_Click"/>
         </StackPanel>
 
     </Grid>

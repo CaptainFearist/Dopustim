@@ -1,0 +1,21 @@
+﻿<Window x:Class="AMOGUSIK.ServiceOrderDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AMOGUSIK"
+        mc:Ignorable="d"
+        Title="Добавление/изменение заказа" Height="300" Width="400">
+    <Grid Margin="10">
+        <StackPanel>
+            <DatePicker x:Name="orderDatePicker" Margin="5" SelectedDate="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="descriptionTextBox" Margin="5" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="costTextBox" Margin="5" Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button Content="Сохранить" Click="SaveButton_Click" Margin="5"/>
+                <Button Content="Отмена" Click="CancelButton_Click" Margin="5"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

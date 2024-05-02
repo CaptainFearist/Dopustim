@@ -25,6 +25,10 @@ namespace AMOGUSIK.Entities
         public virtual DbSet<Customers> Customers { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<ServiceOrders> ServiceOrders { get; set; }
+        public virtual DbSet<Cars> Cars { get; set; }
+        public virtual DbSet<ServiceTypes> ServiceTypes { get; set; }
+
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -43,7 +47,6 @@ namespace AMOGUSIK.Entities
             {
                 entity.HasKey(e => e.OrderID);
 
-                // Пример: Если EmployeeID является внешним ключом для связи
                 //entity.HasOne<Employees>()
                 //      .WithMany()
                 //      .HasForeignKey(e => e.EmployeeID)
@@ -72,7 +75,7 @@ namespace AMOGUSIK.Entities
             modelBuilder.Entity<Customers>(entity =>
             {
                 entity.HasKey(e => e.CustomerID);
-                entity.Property(e => e.CustomerID).ValueGeneratedNever();
+                //entity.Property(e => e.CustomerID).ValueGeneratedNever();
                 entity.Property(e => e.FirstName).HasMaxLength(50).IsUnicode(false);
                 entity.Property(e => e.LastName).HasMaxLength(50).IsUnicode(false);
                 entity.Property(e => e.Username).HasMaxLength(50).IsUnicode(false);
@@ -105,16 +108,30 @@ namespace AMOGUSIK.Entities
             modelBuilder.Entity<ServiceOrders>(entity =>
             {
                 entity.HasKey(e => e.OrderID);
-                entity.Property(e => e.OrderID).ValueGeneratedNever();
+                entity.HasOne(e => e.Car)
+                      .WithMany() 
+                      .HasForeignKey(e => e.CarID)
+                      .OnDelete(DeleteBehavior.Cascade);
+
                 entity.Property(e => e.CarID).HasColumnName("CarID");
                 entity.Property(e => e.ServiceTypeID).HasColumnName("ServiceTypeID");
                 entity.Property(e => e.OrderDate).HasColumnName("OrderDate");
                 entity.Property(e => e.Description).HasColumnName("Description");
                 entity.Property(e => e.Cost).HasColumnName("Cost");
+            });
 
-        });
+            modelBuilder.Entity<ServiceOrders>()
+                .HasOne(so => so.Car)
+                .WithMany(c => c.ServiceOrders)
+                .HasForeignKey(so => so.CarID);
+
+            modelBuilder.Entity<Cars>()
+                .HasOne(c => c.Customers)
+                .WithMany(c => c.Cars)
+                .HasForeignKey(c => c.CustomerID);
 
 
+            base.OnModelCreating(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 
