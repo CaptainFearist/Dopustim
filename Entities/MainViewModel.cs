@@ -64,7 +64,7 @@ namespace AMOGUSIK.ViewModels
             }
             else
             {
-                Orders = GetOrders().Where(order => order.Description.Contains(SearchQuery)).ToList();
+                Orders = _orders.Where(order => order.Description.Contains(SearchQuery)).ToList();
             }
         }
 
@@ -75,12 +75,12 @@ namespace AMOGUSIK.ViewModels
 
         private void SortByDateAscending(object parameter)
         {
-            Orders = GetOrders().OrderBy(order => order.OrderDate).ToList();
+            Orders = Orders.OrderBy(order => order.OrderDate).ToList();
         }
 
         private void SortByDateDescending(object parameter)
         {
-            Orders = GetOrders().OrderByDescending(order => order.OrderDate).ToList();
+            Orders = Orders.OrderByDescending(order => order.OrderDate).ToList();
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
