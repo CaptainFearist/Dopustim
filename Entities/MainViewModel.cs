@@ -18,6 +18,17 @@ namespace AMOGUSIK.ViewModels
         public ICommand SearchCommand { get; }
         public ICommand SortByDateAscendingCommand { get; }
         public ICommand SortByDateDescendingCommand { get; }
+        private bool _isSortedAscending;
+
+        public bool IsSortedAscending
+        {
+            get { return _isSortedAscending; }
+            set
+            {
+                _isSortedAscending = value;
+                OnPropertyChanged(); // Вызов метода для уведомления об изменении свойства
+            }
+        }
 
         public List<ServiceOrders> Orders
         {
@@ -26,6 +37,20 @@ namespace AMOGUSIK.ViewModels
             {
                 _orders = value;
                 OnPropertyChanged();
+            }
+        }
+        public void UpdateSortedOrders()
+        {
+            if (_orders != null)
+            {
+                if (IsSortedAscending)
+                {
+                    SortByDateAscending(null);
+                }
+                else
+                {
+                    SortByDateDescending(null);
+                }
             }
         }
 
@@ -76,11 +101,13 @@ namespace AMOGUSIK.ViewModels
         private void SortByDateAscending(object parameter)
         {
             Orders = Orders.OrderBy(order => order.OrderDate).ToList();
+            OnPropertyChanged(nameof(Orders)); // Обновление представления после сортировки
         }
 
         private void SortByDateDescending(object parameter)
         {
             Orders = Orders.OrderByDescending(order => order.OrderDate).ToList();
+            OnPropertyChanged(nameof(Orders)); // Обновление представления после сортировки
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)

@@ -27,11 +27,18 @@ namespace AMOGUSIK
                 return context.ServiceOrders.ToList();
             }
         }
+        private void RefreshOrders()
+        {
+            ordersListBox.ItemsSource = null;
+            ordersListBox.ItemsSource = ((MainViewModel)DataContext).Orders;
+        }
+
         private void SortByDateAscending_Click(object sender, RoutedEventArgs e)
         {
             if (DataContext is MainViewModel viewModel)
             {
-                viewModel.SortByDateAscendingCommand.Execute(null);
+                viewModel.SortByDateDescendingCommand.Execute(null);
+                _orders = viewModel.Orders.ToList();
                 RefreshOrders();
             }
         }
@@ -40,7 +47,25 @@ namespace AMOGUSIK
         {
             if (DataContext is MainViewModel viewModel)
             {
-                viewModel.SortByDateDescendingCommand.Execute(null);
+                viewModel.SortByDateAscendingCommand.Execute(null);
+                _orders = viewModel.Orders.ToList();
+                RefreshOrders();
+            }
+        }
+
+        public void UpdateSortedOrders()
+        {
+            if (_orders != null)
+            {
+                if (((MainViewModel)DataContext).IsSortedAscending)
+                {
+                    ((MainViewModel)DataContext).SortByDateAscendingCommand.Execute(null);
+                }
+                else
+                {
+                    ((MainViewModel)DataContext).SortByDateDescendingCommand.Execute(null);
+                }
+                _orders = ((MainViewModel)DataContext).Orders.ToList();
                 RefreshOrders();
             }
         }
@@ -87,17 +112,16 @@ namespace AMOGUSIK
                     context.ServiceOrders.Add(newOrder);
                     context.SaveChanges();
                 }
-                _orders.Add(newOrder);
+                // Добавляем заказ и в ViewModel
+                MainViewModel viewModel = DataContext as MainViewModel;
+                if (viewModel != null)
+                {
+                    viewModel.Orders.Add(newOrder);
+                    viewModel.UpdateSortedOrders(); // Обновляем сортировку и фильтрацию
+                }
+
                 RefreshOrders();
             }
-        }
-
-
-
-        private void RefreshOrders()
-        {
-            ordersListBox.ItemsSource = null;
-            ordersListBox.ItemsSource = _orders;
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -133,7 +157,13 @@ namespace AMOGUSIK
                         context.SaveChanges();
                     }
 
-                    _orders.Remove(selectedOrder);
+                    MainViewModel viewModel = DataContext as MainViewModel;
+                    if (viewModel != null)
+                    {
+                        viewModel.Orders.Remove(selectedOrder);
+                        viewModel.UpdateSortedOrders(); // Обновляем сортировку, если она активна
+                    }
+
                     RefreshOrders();
                 }
             }
@@ -142,6 +172,7 @@ namespace AMOGUSIK
                 MessageBox.Show("Выберите заказ для удаления.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
