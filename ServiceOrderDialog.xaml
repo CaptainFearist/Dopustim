@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AMOGUSIK"
         mc:Ignorable="d"
-        Title="Добавление/изменение заказа" Height="300" Width="400">
+        Title="Добавление/изменение заказа" Height="300" Width="400" Background="#FFFFE983">
     <Grid Margin="10">
         <StackPanel>
             <DatePicker x:Name="orderDatePicker" Margin="5" SelectedDate="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" />
