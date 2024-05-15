@@ -173,7 +173,6 @@ namespace AMOGUSIK
             }
         }
 
-
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchQuery = SearchTextBox.Text;
