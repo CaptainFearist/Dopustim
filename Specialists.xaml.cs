@@ -27,6 +27,7 @@ namespace AMOGUSIK
                 return context.ServiceOrders.ToList();
             }
         }
+
         private void SortByDateAscending_Click(object sender, RoutedEventArgs e)
         {
             if (DataContext is MainViewModel viewModel)

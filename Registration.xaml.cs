@@ -103,7 +103,7 @@ namespace AMOGUSIK
 
         private void Login1_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Ваш код для обработки изменения текста в поле Login1
+            
         }
 
     }
