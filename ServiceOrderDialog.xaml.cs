@@ -65,7 +65,8 @@ namespace AMOGUSIK
 
             serviceOrder.OrderDate = orderDatePicker.SelectedDate.Value;
             serviceOrder.Description = descriptionTextBox.Text;
-            serviceOrder.Cost = Convert.ToDecimal(costTextBox.Text);
+            var cost = costTextBox.Text;
+            serviceOrder.Cost = Convert.ToDecimal(cost);
 
             using (audiContext = new AudiCenterusContext())
             {

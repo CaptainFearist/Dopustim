@@ -379,7 +379,7 @@
                 </DatePicker.BorderBrush>
             </DatePicker>
             <TextBox Style="{DynamicResource TextBoxStyle1}" x:Name="descriptionTextBox" Margin="5" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Background="#FFFFF6C0" BorderBrush="#FFDACF5D" />
-            <TextBox Style="{DynamicResource TextBoxStyle2}" x:Name="costTextBox" Margin="5" Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" Background="#FFFFF6C0" BorderBrush="#FFDACF5D" />
+            <TextBox Style="{DynamicResource TextBoxStyle2}" x:Name="costTextBox" Margin="5" Text="{Binding Cost, StringFormat={}{0:N0}, UpdateSourceTrigger=PropertyChanged}" Background="#FFFFF6C0" BorderBrush="#FFDACF5D" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Button Style="{DynamicResource ButtonStyle1}" Content="Сохранить" Click="SaveButton_Click" Margin="5" Background="#FFBBB474"/>
