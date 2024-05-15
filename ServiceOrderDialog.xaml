@@ -10,7 +10,7 @@
         <StackPanel>
             <DatePicker x:Name="orderDatePicker" Margin="5" SelectedDate="{Binding OrderDate, UpdateSourceTrigger=PropertyChanged}" />
             <TextBox x:Name="descriptionTextBox" Margin="5" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBox x:Name="costTextBox" Margin="5" Text="{Binding Cost, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox x:Name="costTextBox" Margin="5" Text="{Binding Cost,StringFormat={}{0:N0}, UpdateSourceTrigger=PropertyChanged}" />
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
                 <Button Content="Сохранить" Click="SaveButton_Click" Margin="5"/>
