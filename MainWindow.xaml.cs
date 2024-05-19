@@ -23,26 +23,6 @@ namespace AMOGUSIK
     /// Interaction logic for MainWindow.xaml
     /// </summary>
 
-    //public class PasswordToVisibilityConverter : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        if (value is string password && !string.IsNullOrEmpty(password))
-    //        {
-    //            return Visibility.Collapsed;
-    //        }
-    //        else
-    //        {
-    //            return Visibility.Visible;
-    //        }
-    //    }
-
-    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
-
     public partial class MainWindow : Window
     {
         private DbContextOptions<AudiCenterusContext> options;
@@ -67,7 +47,7 @@ namespace AMOGUSIK
 
                 if (customer != null)
                 {
-                    MessageBox.Show("Здравствуйте!");
+                    //MessageBox.Show("Здравствуйте!");
 
                     if (customer.RoleID == adminRole.RoleID)
                     {
@@ -87,9 +67,6 @@ namespace AMOGUSIK
                 }
             }
         }
-
-
-
 
         private void RegClk(object sender, RoutedEventArgs e)
         {

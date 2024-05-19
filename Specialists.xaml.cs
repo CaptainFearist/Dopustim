@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using AMOGUSIK.Entities;
 using AMOGUSIK.ViewModels;
 using Castle.Core.Resource;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml;
+using Xceed.Document.NET;
+using Xceed.Words.NET;
 
 namespace AMOGUSIK
 {
@@ -18,6 +22,7 @@ namespace AMOGUSIK
             DataContext = new MainViewModel();
             _orders = GetOrders();
             RefreshOrders();
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
 
         public List<ServiceOrders> GetOrders()
@@ -180,6 +185,96 @@ namespace AMOGUSIK
             ordersListBox.ItemsSource = filteredOrders;
         }
 
+        private void CreateWordDocument_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceOrders selectedOrder = (ServiceOrders)ordersListBox.SelectedItem;
+
+            if (selectedOrder != null)
+            {
+                string fileName = "ServiceOrder";
+                string fileExtension = ".docx";
+                string filePath = GetUniqueFilePath(fileName, fileExtension);
+
+                using (DocX document = DocX.Create(filePath))
+                {
+                    document.InsertParagraph("Детали заказа")
+                        .FontSize(20)
+                        .Bold()
+                        .Alignment = Alignment.center;
+
+                    document.InsertParagraph($"Номер заказа: {selectedOrder.OrderID}");
+                    document.InsertParagraph($"ID автомобиля: {selectedOrder.CarID}");
+                    document.InsertParagraph($"ID типа услуги: {selectedOrder.ServiceTypeID}");
+                    document.InsertParagraph($"Дата заказа: {selectedOrder.OrderDate}");
+                    document.InsertParagraph($"Описание: {selectedOrder.Description}");
+                    document.InsertParagraph($"Стоимость: {selectedOrder.Cost:N0}");
+
+                    document.Save();
+                }
+
+                MessageBox.Show($"Документ Word создан: {filePath}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Выберите заказ для создания документа.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CreateExcelDocument_Click(object sender, RoutedEventArgs e)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            ServiceOrders selectedOrder = (ServiceOrders)ordersListBox.SelectedItem;
+
+            if (selectedOrder != null)
+            {
+                string fileName = "ServiceOrder";
+                string fileExtension = ".xlsx";
+                string filePath = GetUniqueFilePath(fileName, fileExtension);
+
+                using (ExcelPackage package = new ExcelPackage())
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Order Details");
+
+                    worksheet.Cells[1, 1].Value = "Номер заказа";
+                    worksheet.Cells[1, 2].Value = selectedOrder.OrderID;
+                    worksheet.Cells[2, 1].Value = "ID автомобиля";
+                    worksheet.Cells[2, 2].Value = selectedOrder.CarID;
+                    worksheet.Cells[3, 1].Value = "ID типа услуги";
+                    worksheet.Cells[3, 2].Value = selectedOrder.ServiceTypeID;
+                    worksheet.Cells[4, 1].Value = "Дата заказа";
+                    worksheet.Cells[4, 2].Value = selectedOrder.OrderDate.ToString("d");
+                    worksheet.Cells[5, 1].Value = "Описание";
+                    worksheet.Cells[5, 2].Value = selectedOrder.Description;
+                    worksheet.Cells[6, 1].Value = "Стоимость";
+                    worksheet.Cells[6, 2].Value = selectedOrder.Cost;
+
+                    package.SaveAs(new FileInfo(filePath));
+                }
+
+                MessageBox.Show($"Документ Excel создан: {filePath}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Выберите заказ для создания документа.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private string GetUniqueFilePath(string baseName, string extension)
+        {
+            string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string filePath = Path.Combine(folderPath, baseName + extension);
+            int count = 1;
+
+            while (File.Exists(filePath))
+            {
+                string tempFileName = $"{baseName}({count})";
+                filePath = Path.Combine(folderPath, tempFileName + extension);
+                count++;
+            }
+
+            return filePath;
+        }
 
         private void Button_ClickVK(object sender, RoutedEventArgs e)
         {

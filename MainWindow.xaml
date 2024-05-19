@@ -8,7 +8,8 @@
         Title="Авторизация"
         Height="330"
         Width="360"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
 
         <ImageBrush x:Key="OpenKeyBackground"
@@ -599,6 +600,7 @@
                 VerticalAlignment="Top"
                 Width="94"
                 Click="enterClk"
+                IsDefault="True"
                 Background="#FF989255" />
         <Label Content="Авторизация"
                HorizontalAlignment="Center"
@@ -614,6 +616,7 @@
                  TextWrapping="Wrap"
                  Text=""
                  VerticalAlignment="Top"
+                 VerticalContentAlignment="Center"
                  Width="190"
                  Background="#FFFFF6C0"
                  BorderBrush="#FFBFBFBF"
@@ -626,6 +629,7 @@
                  Margin="0,116,0,0"
                  TextWrapping="Wrap"
                  VerticalAlignment="Top"
+                 VerticalContentAlignment="Center"
                  Width="190"
                  Background="#FFFFF6C0"
                  Height="25"
@@ -649,6 +653,7 @@
                      x:Name="txtPassINV"
                      HorizontalAlignment="Center"
                      VerticalAlignment="Top"
+                     VerticalContentAlignment="Center"
                      Width="190"
                      Background="#FFFFF6C0"
                      BorderBrush="#FFBFBFBF"
