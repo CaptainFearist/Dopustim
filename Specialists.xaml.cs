@@ -195,21 +195,28 @@ namespace AMOGUSIK
                 string fileExtension = ".docx";
                 string filePath = GetUniqueFilePath(fileName, fileExtension);
 
-                using (DocX document = DocX.Create(filePath))
+                // Path to the template file
+                string templatePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Template.docx");
+
+                if (!File.Exists(templatePath))
                 {
-                    document.InsertParagraph("Детали заказа")
-                        .FontSize(20)
-                        .Bold()
-                        .Alignment = Alignment.center;
+                    MessageBox.Show("Шаблонный файл не найден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
-                    document.InsertParagraph($"Номер заказа: {selectedOrder.OrderID}");
-                    document.InsertParagraph($"ID автомобиля: {selectedOrder.CarID}");
-                    document.InsertParagraph($"ID типа услуги: {selectedOrder.ServiceTypeID}");
-                    document.InsertParagraph($"Дата заказа: {selectedOrder.OrderDate}");
-                    document.InsertParagraph($"Описание: {selectedOrder.Description}");
-                    document.InsertParagraph($"Стоимость: {selectedOrder.Cost:N0}");
+                // Load the template document
+                using (DocX document = DocX.Load(templatePath))
+                {
+                    // Insert data into the template
+                    document.ReplaceText("{OrderID}", selectedOrder.OrderID.ToString());
+                    document.ReplaceText("{CarID}", selectedOrder.CarID.ToString());
+                    document.ReplaceText("{ServiceTypeID}", selectedOrder.ServiceTypeID.ToString());
+                    document.ReplaceText("{OrderDate}", selectedOrder.OrderDate.ToString("d"));
+                    document.ReplaceText("{Description}", selectedOrder.Description);
+                    document.ReplaceText("{Cost}", selectedOrder.Cost.ToString("N0"));
 
-                    document.Save();
+                    // Save the document as a new file
+                    document.SaveAs(filePath);
                 }
 
                 MessageBox.Show($"Документ Word создан: {filePath}", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -260,21 +267,21 @@ namespace AMOGUSIK
             }
         }
 
-        private string GetUniqueFilePath(string baseName, string extension)
+        private string GetUniqueFilePath(string baseFileName, string fileExtension)
         {
             string folderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string filePath = Path.Combine(folderPath, baseName + extension);
+            string filePath = Path.Combine(folderPath, baseFileName + fileExtension);
             int count = 1;
 
             while (File.Exists(filePath))
             {
-                string tempFileName = $"{baseName}({count})";
-                filePath = Path.Combine(folderPath, tempFileName + extension);
-                count++;
+                string tempFileName = $"{baseFileName} ({count++})";
+                filePath = Path.Combine(folderPath, tempFileName + fileExtension);
             }
 
             return filePath;
         }
+
 
         private void Button_ClickVK(object sender, RoutedEventArgs e)
         {
