@@ -195,7 +195,6 @@ namespace AMOGUSIK
                 string fileExtension = ".docx";
                 string filePath = GetUniqueFilePath(fileName, fileExtension);
 
-                // Path to the template file
                 string templatePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Template.docx");
 
                 if (!File.Exists(templatePath))
@@ -207,7 +206,6 @@ namespace AMOGUSIK
                 // Load the template document
                 using (DocX document = DocX.Load(templatePath))
                 {
-                    // Insert data into the template
                     document.ReplaceText("{OrderID}", selectedOrder.OrderID.ToString());
                     document.ReplaceText("{CarID}", selectedOrder.CarID.ToString());
                     document.ReplaceText("{ServiceTypeID}", selectedOrder.ServiceTypeID.ToString());
@@ -215,7 +213,6 @@ namespace AMOGUSIK
                     document.ReplaceText("{Description}", selectedOrder.Description);
                     document.ReplaceText("{Cost}", selectedOrder.Cost.ToString("N0"));
 
-                    // Save the document as a new file
                     document.SaveAs(filePath);
                 }
 
@@ -282,7 +279,12 @@ namespace AMOGUSIK
             return filePath;
         }
 
-
+        private void Graph_Click(object sender, RoutedEventArgs e)
+        {
+            Graphic graf = new Graphic();
+            graf.Show();
+            this.Close();
+        }
         private void Button_ClickVK(object sender, RoutedEventArgs e)
         {
 
@@ -292,6 +294,5 @@ namespace AMOGUSIK
         {
 
         }
-
     }
 }

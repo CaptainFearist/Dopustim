@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:AMOGUSIK"
         mc:Ignorable="d"
         Title="Добавление/изменение заказа" Height="300" Width="400" Background="#FFFFE983"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
