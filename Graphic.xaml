@@ -265,7 +265,7 @@
                 <lvc:Axis Title="Лабораторные работы" Foreground="Black" Labels="1, 2, 3, 4, 5, 6, 7, 9, 10"/>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Сложность" Foreground="Black" MinValue="0" MaxValue="10"/>
+                <lvc:Axis Title="Сложность (Big O)" Foreground="Black"/>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
 
